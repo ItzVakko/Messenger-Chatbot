@@ -1,51 +1,17 @@
-import React, { useEffect } from "react";
+import React from 'react'
+import './App.css'
+import MessengerChat from './MessengerChat'
 
-const MessengerChat = () => {
-  useEffect(() => {
-    const loadSDK = () => {
-      if (window.FB) {
-        window.FB.XFBML.parse();
-        return;
-      }
-
-      const script = document.createElement("script");
-      script.id = "facebook-jssdk";
-      script.src =
-        "https://connect.facebook.net/en_US/sdk/xfbml.customerchat.js";
-      script.async = true;
-      script.onload = () => {
-        window.FB.init({
-          appId: "1131104729026921",
-          autoLogAppEvents: true,
-          xfbml: true,
-          version: "v10.0",
-        });
-        window.FB.XFBML.parse();
-      };
-
-      script.onerror = (error) => {
-        console.error("Error loading the Facebook SDK:", error);
-      };
-
-      document.body.appendChild(script);
-    };
-
-    loadSDK();
-  }, []);
-
+function App() {
   return (
-    <div>
-      {/* The Facebook Messenger chat widget */}
-      <div
-        className="fb-customerchat"
-        attribution="setup_tool"
-        page_id="576324402235215"
-        theme_color="#0084ff"
-        logged_in_greeting="Hi! How can we help you?"
-        logged_out_greeting="Goodbye! Come back soon."
-      />
+    <div className="App">
+      <header className="App-header">
+        <h1>My React App with Facebook Messenger</h1>
+        <p>This is a sample application with Facebook Messenger integration.</p>
+      </header>
+      <MessengerChat />
     </div>
-  );
-};
+  )
+}
 
-export default MessengerChat;
+export default App
